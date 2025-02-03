@@ -43,7 +43,11 @@ public class Mountain implements Serializable{
     }
 
     public void setCode(String code) {
-        this.code = code;
+        String tmp = code;
+        if(code.length() < 2) {
+            tmp = "0" + code;
+        }
+        this.code = tmp;
     }
 
     public String getName() {

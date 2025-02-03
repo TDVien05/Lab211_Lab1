@@ -37,7 +37,10 @@ public class StudentMountain implements Serializable{
     }
 
     public void setMountainCode(String mountainCode) {
-        this.mountainCode = mountainCode;
+        String tmp = mountainCode;
+        if(mountainCode.length() < 2)
+            tmp = "0" + mountainCode;
+        this.mountainCode = "MT" + tmp;
     }
 
     public StudentMountain(Student student) {

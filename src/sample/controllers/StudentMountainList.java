@@ -153,7 +153,7 @@ public class StudentMountainList extends ArrayList<StudentMountain> implements I
                     countinous = false;
                 }
             } while (countinous);
-            
+
             double fee = Utils.BASE_FEE;
             String first3Character = student.getPhone().substring(0, 3);
             if (first3Character.equals("098") || first3Character.equals("097")
@@ -184,8 +184,9 @@ public class StudentMountainList extends ArrayList<StudentMountain> implements I
         } else {
             this.get(index).displayDelete();
             boolean confirmDelete = Utils.confirmYesNo("Are you sure you want to delete this registration? (Y/N):");
-            if(confirmDelete)
-            this.remove(index);
+            if (confirmDelete) {
+                this.remove(index);
+            }
         }
         return result;
     }
@@ -204,24 +205,28 @@ public class StudentMountainList extends ArrayList<StudentMountain> implements I
     }
 
     @Override
-    public void displayList(List<Object> list) {
+    public void displayList(List<Object> list, String type) {
         if (list.size() == 0) {
-            System.out.println("No one matches the search criteria!");
+            if (type.equalsIgnoreCase("display")) {
+                System.out.println("No students have registered yet.");
+            } else {
+                System.out.println("No one matches the search criteria.");
+            }
         } else {
-            for(int i = 0; i < 71; i++) {
-            System.out.print("-");
-        }
-        System.out.println("");
-        System.out.println("Student ID   | Name              | Phone      | Peak Code | Fee");
-        for(int i = 0; i < 71; i++) {
-            System.out.print("-");
-        }
-        System.out.println("");
+            for (int i = 0; i < 71; i++) {
+                System.out.print("-");
+            }
+            System.out.println("");
+            System.out.println("Student ID   | Name              | Phone      | Peak Code | Fee");
+            for (int i = 0; i < 71; i++) {
+                System.out.print("-");
+            }
+            System.out.println("");
             for (int i = 0; i < list.size(); i++) {
                 System.out.println(((StudentMountain) list.get(i)).toString());
             }
         }
-        for(int i = 0; i < 71; i++) {
+        for (int i = 0; i < 71; i++) {
             System.out.print("-");
         }
         System.out.println("");
@@ -249,41 +254,52 @@ public class StudentMountainList extends ArrayList<StudentMountain> implements I
         } catch (IOException ex) {
             Logger.getLogger(StudentMountainList.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         for (int i = 0; i < listMountain.size(); i++) {
             int participants = 0;
             double cost = 0;
             for (int j = 0; j < this.size(); j++) {
                 String tmp = listMountain.get(i).toString();
+                if (tmp.length() < 2) {
+                    tmp = "0" + tmp;
+                }
+                tmp = "MT" + tmp;
                 if (this.get(j).getMountainCode().equals(tmp)) {
                     participants++;
                     cost += this.get(j).getFee();
                 }
             }
-            if(participants != 0) 
-                list.add(new Statistics((((Mountain)listMountain.get(i)).getCode()), participants, cost));
+            if (participants != 0) {
+                String tmp = (((Mountain)listMountain.get(i)).getCode());
+                if(tmp.length() < 2) {
+                    tmp = "0" + tmp;
+                }
+                tmp = "MT" + tmp;
+                list.add(new Statistics(tmp, participants, cost));
+            }
+
         }
         return list;
     }
-    
+
     public void displayStatistics(List<Object> list) {
         if (list.size() == 0) {
             System.out.println("No one matches the search criteria!");
         } else {
-            for(int i = 0; i < 66; i++) {
-            System.out.print("-");
-        }
-        System.out.println("");
-        System.out.println("Peak Code   | Number of participants       | Total cost");
-        for(int i = 0; i < 66; i++) {
-            System.out.print("-");
-        }
-        System.out.println("");
+            for (int i = 0; i < 66; i++) {
+                System.out.print("-");
+            }
+            System.out.println("");
+            System.out.println("Peak Code   | Number of participants       | Total cost");
+            for (int i = 0; i < 66; i++) {
+                System.out.print("-");
+            }
+            System.out.println("");
             for (int i = 0; i < list.size(); i++) {
                 System.out.println(((Statistics) list.get(i)).toString());
             }
         }
-        for(int i = 0; i < 66; i++) {
+        for (int i = 0; i < 66; i++) {
             System.out.print("-");
         }
         System.out.println("");
@@ -292,13 +308,14 @@ public class StudentMountainList extends ArrayList<StudentMountain> implements I
     public void loadData() {
         try {
             List<Object> list = Utils.readListOjectFromFile("studentMountainList.bin");
-            for(int i = 0; i < list.size(); i++) {
-                StudentMountain tmp = (StudentMountain)list.get(i);
+            for (int i = 0; i < list.size(); i++) {
+                StudentMountain tmp = (StudentMountain) list.get(i);
+                tmp.setMountainCode(tmp.getMountainCode());
                 this.add(tmp);
             }
         } catch (IOException ex) {
             Logger.getLogger(StudentMountainList.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 }

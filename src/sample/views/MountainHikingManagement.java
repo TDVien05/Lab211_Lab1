@@ -1,7 +1,6 @@
 package sample.views;
 
 import java.util.List;
-import javax.rmi.CORBA.Util;
 import sample.controllers.Menu;
 import sample.controllers.StudentMountainList;
 import sample.models.I_List;
@@ -40,28 +39,28 @@ public class MountainHikingManagement {
             choice = menu.getChoice();            
             switch (choice) {
                 case 1:
-                    Utils.displayStatus(list.create(), "Add new registration successfully", "Add registration was failed");
+                    Utils.displayStatus(list.create(), "Add new registration successfully.", "Add registration was failed.");
                     break;
                 case 2:
                     id = Utils.getString("Input student id to update : ");
-                    Utils.displayStatus(list.update(id.toUpperCase()), "Update registration successfully", "Update registration was failed");
+                    Utils.displayStatus(list.update(id.toUpperCase()), "Update registration successfully.", "This student has not registered yet.");
                     break;
                 case 3:
-                    ((StudentMountainList)list).displayList((List<Object>) list);
+                    ((StudentMountainList)list).displayList((List<Object>) list, "display");
                     break;
                 case 4:
                     id = Utils.getString("Input student id to delete : ");
-                    Utils.displayStatus(list.delete(id.toUpperCase()), "Delete registration successfully", "Delete registration was failed");
+                    Utils.displayStatus(list.delete(id.toUpperCase()), "Delete registration successfully.", "no students have registered yet.");
                     break;
                 case 5:
                     String name = Utils.getString("Input participant's name to search : ");
                     List<Object> searchedList = list.search(name);
-                    ((StudentMountainList)list).displayList(searchedList);
+                    ((StudentMountainList)list).displayList(searchedList, "search");
                     break;
                 case 6:
                     String campus = Utils.getString("Input campus [SE/ DE/ HE/ CE/ QE] : ");
                     List<Object> filterList = list.filter(campus.toUpperCase());
-                    ((StudentMountainList)list).displayList(filterList);
+                    ((StudentMountainList)list).displayList(filterList, "filter");
                     break;
                 case 7:
                     List<Object> statisticsList = list.statistic();

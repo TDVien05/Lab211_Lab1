@@ -15,7 +15,7 @@ public interface I_List {
     boolean create();
     boolean update(String id);
     boolean delete(String id);
-    void displayList(List<Object> list);
+    void displayList(List<Object> list, String type);
     List<Object> search(String name);
     List<Object> filter(String name);
     List<Object> statistic();

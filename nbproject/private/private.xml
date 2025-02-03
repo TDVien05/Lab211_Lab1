@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/LAB/MountainHikingT4S1/src/sample/views/MountainHikingManagement.java</file>
+            <file>file:/D:/LAB/MountainHikingT4S1/src/sample/models/StudentMountain.java</file>
+            <file>file:/D:/LAB/MountainHikingT4S1/src/sample/models/I_List.java</file>
+            <file>file:/D:/LAB/MountainHikingT4S1/src/sample/controllers/StudentMountainList.java</file>
+            <file>file:/D:/LAB/MountainHikingT4S1/src/sample/models/Mountain.java</file>
+        </group>
     </open-files>
 </project-private>
