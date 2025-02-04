@@ -61,7 +61,7 @@ public class StudentMountainList extends ArrayList<StudentMountain> implements I
 //            Nhập email
                 countinous = true;
                 do {
-                    String email = Utils.getString("Input Student êmail: ");
+                    String email = Utils.getString("Input Student email: ");
                     if (Utils.isValidateEmail(email)) {
                         student.setEmail(email);
                         countinous = false;
@@ -90,7 +90,11 @@ public class StudentMountainList extends ArrayList<StudentMountain> implements I
                     || first3Character.equals("090") || first3Character.equals("091")) {
                 fee = Utils.BASE_FEE * Utils.DISCOUNT_FEE / 100;
             }
-            this.add(new StudentMountain(student, mountainCode, fee));
+            StudentMountain newSt = new StudentMountain();
+            newSt.setStudent(student);
+            newSt.setMountainCode(mountainCode);
+            newSt.setFee(fee);
+            this.add(newSt);
             result = true;
 
         } catch (Exception e) {
@@ -105,6 +109,7 @@ public class StudentMountainList extends ArrayList<StudentMountain> implements I
         boolean check = false;
         try {
             Utils.writeListObjectToFile(path, this);
+            check = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -186,6 +191,7 @@ public class StudentMountainList extends ArrayList<StudentMountain> implements I
             boolean confirmDelete = Utils.confirmYesNo("Are you sure you want to delete this registration? (Y/N):");
             if (confirmDelete) {
                 this.remove(index);
+                result = true;
             }
         }
         return result;
@@ -254,7 +260,6 @@ public class StudentMountainList extends ArrayList<StudentMountain> implements I
         } catch (IOException ex) {
             Logger.getLogger(StudentMountainList.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         for (int i = 0; i < listMountain.size(); i++) {
             int participants = 0;
             double cost = 0;
@@ -274,7 +279,8 @@ public class StudentMountainList extends ArrayList<StudentMountain> implements I
                 if(tmp.length() < 2) {
                     tmp = "0" + tmp;
                 }
-                tmp = "MT" + tmp;
+                if(!tmp.startsWith("MT"))
+                    tmp = "MT" + tmp;
                 list.add(new Statistics(tmp, participants, cost));
             }
 

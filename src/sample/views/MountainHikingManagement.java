@@ -67,7 +67,7 @@ public class MountainHikingManagement {
                     ((StudentMountainList)list).displayStatistics(statisticsList);
                     break;
                 case 8:
-                    Utils.displayStatus(list.saveToFile("studentMountainList.bin"), "Delete registration successfully", "Delete registration was failed");
+                    Utils.displayStatus(list.saveToFile("studentMountainList.bin"), "Save data successfully", "Save data was failured");
                     break;
                 case 9:
                     cont = menu.confirmYesNo("Do you want to quit?(Y/N)");

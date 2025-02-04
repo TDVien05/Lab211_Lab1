@@ -40,7 +40,9 @@ public class StudentMountain implements Serializable{
         String tmp = mountainCode;
         if(mountainCode.length() < 2)
             tmp = "0" + mountainCode;
-        this.mountainCode = "MT" + tmp;
+        if(!tmp.startsWith("MT"))
+            tmp = "MT" + tmp;
+        this.mountainCode = tmp;
     }
 
     public StudentMountain(Student student) {

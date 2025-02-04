@@ -47,6 +47,8 @@ public class Mountain implements Serializable{
         if(code.length() < 2) {
             tmp = "0" + code;
         }
+        if(!tmp.startsWith("MT"))
+            tmp = "MT" + tmp;
         this.code = tmp;
     }
 
